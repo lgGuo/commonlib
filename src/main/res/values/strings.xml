@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">GBaseLib</string>
+    <string name="found_new_version">发现新版本\n优化用户体验</string>
+</resources>
