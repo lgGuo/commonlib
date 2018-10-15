@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.WindowManager.LayoutParams;
 import android.widget.TextView;
 
 import com.glg.baselib.R;
@@ -27,7 +26,7 @@ public class LoadingDialog extends Dialog {
         super(context, R.style.MyLoadDialog);
         this.mContext = context;
         inflater = (LayoutInflater) mContext .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View layout = inflater.inflate(R.layout.base_loading, null);
+        View layout = inflater.inflate(R.layout.dialog_loading, null);
         loadtext = (TextView) layout.findViewById(R.id.loading_title);
         setContentView(layout);
 

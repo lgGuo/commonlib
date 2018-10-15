@@ -147,4 +147,10 @@ dependencies {
     api('com.github.nukc.stateview:library:1.5.4'){
         exclude group: 'com.android.support'
     }
+
+
+    // ViewModel and LiveData
+    api('android.arch.lifecycle:extensions:1.1.1'){
+        exclude group: 'com.android.support'
+    }
 }

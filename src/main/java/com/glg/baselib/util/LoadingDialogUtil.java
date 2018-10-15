@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.TextView;
 
 import com.glg.baselib.R;
 import com.glg.baselib.base.BaseApplication;
@@ -125,7 +124,7 @@ public class LoadingDialogUtil {
     public static  void showAlert(){
         AlertDialog.Builder builder = new AlertDialog.Builder(BaseApplication.getMyApplication());
         LayoutInflater inflater = LayoutInflater.from(BaseApplication.getMyApplication());
-        View v = inflater.inflate(R.layout.base_loading, null);
+        View v = inflater.inflate(R.layout.dialog_loading, null);
         final Dialog dialog = builder.create();
         Window window = dialog.getWindow();
         window.setContentView(v);
