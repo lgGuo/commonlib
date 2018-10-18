@@ -29,7 +29,7 @@ public class BaseApplication extends Application {
         MMKV.initialize(this);
 
 
-        FileDownloader.setup(this);
+        FileDownloader.init(this);
         initLoadLayout();
 
     }
