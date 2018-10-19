@@ -53,13 +53,6 @@ dependencies {
         exclude group: 'com.android.support'
     }
 
-
-    //通用dialog
-    api('com.github.Othershe:NiceDialog:1.1.4') {
-        exclude group: 'com.android.support'
-    }
-
-
     api('io.reactivex.rxjava2:rxjava:2.1.9') {
         exclude group: 'com.android.support'
     }
@@ -164,6 +157,17 @@ dependencies {
     }
 
     api "com.github.qingmei2:rximagepicker_support_zhihu:2.2.0",{
+        exclude group: 'com.android.support'
+    }
+
+
+    //通用dialog
+    api('com.github.Othershe:NiceDialog:1.1.4') {
+        exclude group: 'com.android.support'
+    }
+
+    //通用shape
+    api('com.github.lygttpod:SuperTextView:2.1.8') {
         exclude group: 'com.android.support'
     }
 

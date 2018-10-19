@@ -1,21 +1,10 @@
 package com.glg.baselib.util;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.glg.baselib.R;
-
-import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Base64;
 
 public class StringUtil {
 
