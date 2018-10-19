@@ -8,13 +8,16 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
+import android.provider.Settings;
 import android.support.v4.content.FileProvider;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.WindowManager;
+import android.widget.Toast;
 
+import com.glg.baselib.adapter.LibFileProvider;
 import com.glg.baselib.base.BaseApplication;
 import com.orhanobut.logger.Logger;
 
@@ -128,24 +131,37 @@ public class SystemUtil {
      * @param file
      */
     public static void installApk(Context context,File file) {
-        Intent intent = new Intent();
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.setAction(Intent.ACTION_VIEW);
 
-        if(Build.VERSION.SDK_INT>=24) { //判读版本是否在7.0以上
-            //参数1 上下文, 参数2 Provider主机地址 和配置文件中保持一致   参数3  共享的文件
-            Uri apkUri = FileProvider.getUriForFile(context, context.getPackageName()+".provider", file);
-            //添加这一句表示对目标应用临时授权该Uri所代表的文件
-            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            //intent.setDataAndType(apkUri, "application/vnd.android.package-archive");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            if (context.getPackageManager().canRequestPackageInstalls()){
+                Intent intent = new Intent();
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.setAction(Intent.ACTION_VIEW);
+                LibFileProvider
+                        .setIntentDataAndType(context,intent
+                                ,"application/vnd.android.package-archive",file,true);
+                context.startActivity(intent);
+            }else {
+                Uri packageURI = Uri.parse("package:" + context.getPackageName());
+                //注意这个是8.0新API
+                Intent intent = new Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES, packageURI);
+                context.startActivity(intent);
+            }
 
-            intent.setDataAndType(apkUri, context.getContentResolver().getType(apkUri));
-            Logger.e(apkUri.toString());
-        }else{
-            intent.setDataAndType(Uri.fromFile(file),"application/vnd.android.package-archive");
+        } else {
+            Intent intent = new Intent();
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.setAction(Intent.ACTION_VIEW);
+            LibFileProvider
+                    .setIntentDataAndType(context,intent
+                            ,"application/vnd.android.package-archive",file,true);
+            context.startActivity(intent);
         }
 
-        context.startActivity(intent);
+
+
+
+
 
 
     }

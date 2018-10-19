@@ -1,11 +1,16 @@
 package com.glg.baselib.util;
 
 
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
+import android.provider.Settings;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.TextView;
 
 import com.glg.baselib.R;
+import com.glg.baselib.adapter.LibFileProvider;
 import com.glg.baselib.base.BaseApplication;
 import com.glg.baselib.util.appupdate.BaseUpdate;
 import com.liulishuo.filedownloader.BaseDownloadTask;
@@ -51,12 +56,23 @@ public class AppUpdateHelper {
                     @Override
                     public void convertView(ViewHolder holder, final BaseNiceDialog dialog) {
                         TextView confirm = holder.getView(R.id.submit);
+                        TextView cancel = holder.getView(R.id.cancel);
 
                         confirm.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
                                 dialog.dismiss();
                                 downloadApp(activity, true, baseUpdate);
+                            }
+                        });
+
+                        cancel.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                if(!baseUpdate.isForceUpdate()){
+                                    dialog.dismiss();
+                                }
+
                             }
                         });
                     }
@@ -76,15 +92,35 @@ public class AppUpdateHelper {
                     public void convertView(ViewHolder holder, final BaseNiceDialog dialog) {
                         TextView confirm = holder.getView(R.id.submit);
                         TextView content = holder.getView(R.id.content);
-
-                        content.setText("安装包已经准别好，赶紧免流量安装，体验更多惊喜功能吧！");
+                        TextView cancel = holder.getView(R.id.cancel);
+                        confirm.setText("立即安装");
+                        content.setText("安装包已经准备好，赶紧免流量安装，体验更多惊喜功能吧！");
+                        cancel.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                dialog.dismiss();
+                            }
+                        });
 
                         confirm.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
                                 //安装app
-                                dialog.dismiss();
-                                SystemUtil.installApk(activity, new File(path));
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                                    if (activity.getPackageManager().canRequestPackageInstalls()){
+                                        dialog.dismiss();
+                                        SystemUtil.installApk(activity, new File(path));
+                                    }else {
+                                        Uri packageURI = Uri.parse("package:" + activity.getPackageName());
+                                        //注意这个是8.0新API
+                                        Intent intent = new Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES, packageURI);
+                                        activity.startActivity(intent);
+                                    }
+
+                                } else {
+                                    dialog.dismiss();
+                                    SystemUtil.installApk(activity, new File(path));
+                                }
 
                             }
                         });
@@ -119,6 +155,18 @@ public class AppUpdateHelper {
                         if (fromUpdateTips) {
                             //安装app
                             SystemUtil.installApk(activity, new File(task.getPath()));
+
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                                if (activity.getPackageManager().canRequestPackageInstalls()){
+                                    SystemUtil.installApk(activity, new File(task.getPath()));
+                                }else {
+
+                                    showDownloadDoneDialog(activity,task.getPath());
+                                }
+
+                            } else {
+                                SystemUtil.installApk(activity, new File(task.getPath()));
+                            }
 
                         } else {
                             showDownloadDoneDialog(activity, baseUpdate.getStorePath());
