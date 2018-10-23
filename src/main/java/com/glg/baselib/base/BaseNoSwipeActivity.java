@@ -84,7 +84,7 @@ public abstract class BaseNoSwipeActivity extends AppCompatActivity{
      * 关闭loading
      * @param target 由哪个view而触发的loading
      */
-    protected void showHideLoading( View target){
+    protected void hideLoading( View target){
         if (target!=null){
             target.setClickable(true);
             target.setEnabled(true);
