@@ -1,15 +1,14 @@
 apply plugin: 'com.android.library'
 
+
 android {
     compileSdkVersion 28
-
-
 
     defaultConfig {
         minSdkVersion 17
         targetSdkVersion 27
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -22,6 +21,10 @@ android {
         }
     }
 
+
+    lintOptions {
+        abortOnError false
+    }
 
 }
 
@@ -40,7 +43,6 @@ dependencies {
         exclude group: 'com.android.support'
     }
     annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
-
 
     //网络请求
     api('com.squareup.retrofit2:retrofit:2.3.0') {
@@ -67,7 +69,6 @@ dependencies {
         exclude group: 'com.android.support'
     }
 
-
     //RecyclerView适配器
     api('com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.26') {
         exclude group: 'com.android.support'
@@ -88,12 +89,10 @@ dependencies {
         exclude group: 'com.android.support'
     }
 
-
     //滑动返回
     api('com.jude:swipebackhelper:3.1.2') {
         exclude group: 'com.android.support'
     }
-
 
     //状态栏处理
     api('com.jaeger.statusbarutil:library:1.4.0') {
@@ -102,7 +101,6 @@ dependencies {
     api('com.githang:status-bar-compat:0.5.3') {
         exclude group: 'com.android.support'
     }
-
 
     //下拉刷新
     api('com.scwang.smartrefresh:SmartRefreshLayout:1.0.3') {
@@ -119,12 +117,10 @@ dependencies {
         exclude group: 'com.android.support'
     }
 
-
     //mvp框架
     api('com.hannesdorfmann.mosby3:viewstate:3.1.0') {
         exclude group: 'com.android.support'
     }
-
 
     //下载
     api('com.liulishuo.filedownloader:library:1.7.5') {
@@ -132,35 +128,32 @@ dependencies {
     }
 
     //key-value数据本地存储
-    api('com.tencent:mmkv:1.0.10'){
+    api('com.tencent:mmkv:1.0.10') {
         exclude group: 'com.android.support'
     }
 
-
     //load布局
-    api('com.lai.weavey:loadinglayout:1.3.1'){
+    api('com.lai.weavey:loadinglayout:1.3.1') {
         exclude group: 'com.android.support'
     }
 
     // ViewModel and LiveData
-    api('android.arch.lifecycle:extensions:1.1.1'){
+    api('android.arch.lifecycle:extensions:1.1.1') {
         exclude group: 'com.android.support'
     }
-
 
     // 知乎图片选择器
-    api "com.github.qingmei2:rximagepicker:2.2.0",{
+    api "com.github.qingmei2:rximagepicker:2.2.0", {
         exclude group: 'com.android.support'
     }
 
-    api "com.github.qingmei2:rximagepicker_support:2.2.0",{
+    api "com.github.qingmei2:rximagepicker_support:2.2.0", {
         exclude group: 'com.android.support'
     }
 
-    api "com.github.qingmei2:rximagepicker_support_zhihu:2.2.0",{
+    api "com.github.qingmei2:rximagepicker_support_zhihu:2.2.0", {
         exclude group: 'com.android.support'
     }
-
 
     //通用dialog
     api('com.github.Othershe:NiceDialog:1.1.4') {
@@ -172,7 +165,13 @@ dependencies {
         exclude group: 'com.android.support'
     }
 
-
-
-
 }
+
+
+
+
+
+
+
+
+
