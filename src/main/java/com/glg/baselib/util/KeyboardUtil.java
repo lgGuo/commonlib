@@ -15,14 +15,11 @@
  */
 package com.glg.baselib.util;
 
-import android.annotation.TargetApi;
 import android.content.Context;
-import android.os.Build;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-
-import java.util.Timer;
-import java.util.TimerTask;
+import android.widget.EditText;
 
 
 /**
@@ -30,37 +27,45 @@ import java.util.TimerTask;
  */
 public class KeyboardUtil {
 
-    @TargetApi(Build.VERSION_CODES.CUPCAKE)
-    public static void showKeyboard(final View view) {
-        view.requestFocus();
-        InputMethodManager inputManager =
-                (InputMethodManager) view.getContext().getSystemService(
-                        Context.INPUT_METHOD_SERVICE);
-        inputManager.showSoftInput(view, 0);
-    }
+    /**
+     * 针对给定的editText显示软键盘（editText会先获得焦点）. 可以和{@link #hideKeyboard(View)}
+     * 搭配使用，进行键盘的显示隐藏控制。
+     */
 
-    @TargetApi(Build.VERSION_CODES.CUPCAKE)
-    public static void hideKeyboard(final View view) {
-        InputMethodManager imm =
-                (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-        view.clearFocus();
-        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-    }
+    public static void showKeyboard(final EditText editText) {
+        if (null == editText)
+            return;
 
+        if (!editText.requestFocus()) {
+            Log.w("KeyboardUtil", "showSoftInput() can not get focus");
+            return;
+        }
 
-    public static void showMyKeyBorad(final View view) {
-
-        view.setFocusable(true);
-        view.setFocusableInTouchMode(true);
-        view.requestFocus();
-        Timer timer=new Timer();
-        timer.schedule(new TimerTask() {
+        editText.postDelayed(new Runnable() {
             @Override
             public void run() {
-                KeyboardUtil.showKeyboard(view);
+                InputMethodManager imm = (InputMethodManager) editText.getContext().getApplicationContext()
+                        .getSystemService(Context.INPUT_METHOD_SERVICE);
+                assert imm != null;
+                imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
             }
-        },200);
+        }, 200);
+    }
 
+    /**
+     * 隐藏软键盘
+     * @param view 当前页面上任意一个可用的view
+     */
+    public static boolean hideKeyboard(final View view) {
+        if (null == view)
+            return false;
+
+        InputMethodManager inputManager = (InputMethodManager) view.getContext().getApplicationContext()
+                .getSystemService(Context.INPUT_METHOD_SERVICE);
+        // 即使当前焦点不在editText，也是可以隐藏的。
+        assert inputManager != null;
+        return inputManager.hideSoftInputFromWindow(view.getWindowToken(),
+                InputMethodManager.HIDE_NOT_ALWAYS);
     }
 
 

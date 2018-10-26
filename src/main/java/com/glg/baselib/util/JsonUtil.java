@@ -1,6 +1,7 @@
 package com.glg.baselib.util;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.orhanobut.logger.Logger;
 
 import java.util.List;
@@ -40,4 +41,6 @@ public class JsonUtil {
         }
         return "解析错误";
     }
+
+
 }
