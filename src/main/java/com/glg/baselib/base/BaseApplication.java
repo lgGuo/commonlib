@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.support.multidex.MultiDex;
 
+import cn.bingoogolapple.swipebacklayout.BGASwipeBackHelper;
 import com.glg.baselib.BuildConfig;
 import com.glg.baselib.R;
 import com.liulishuo.filedownloader.FileDownloader;
@@ -31,6 +32,8 @@ public class BaseApplication extends Application {
 
         FileDownloader.init(this);
         initLoadLayout();
+
+        BGASwipeBackHelper.init(this,  null);
 
     }
 
