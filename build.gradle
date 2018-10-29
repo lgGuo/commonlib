@@ -89,10 +89,6 @@ dependencies {
         exclude group: 'com.android.support'
     }
 
-    //滑动返回
-    api('com.jude:swipebackhelper:3.1.2') {
-        exclude group: 'com.android.support'
-    }
 
     //状态栏处理
     api('com.jaeger.statusbarutil:library:1.4.0') {
@@ -166,7 +162,7 @@ dependencies {
     }
 
 
-    //通用shape
+    //滑动返回
     api('cn.bingoogolapple:bga-swipebacklayout:1.1.9@aar') {
         exclude group: 'com.android.support'
     }
