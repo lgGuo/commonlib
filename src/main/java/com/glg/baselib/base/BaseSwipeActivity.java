@@ -1,13 +1,11 @@
 package com.glg.baselib.base;
 
-import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.Window;
 import cn.bingoogolapple.swipebacklayout.BGASwipeBackHelper;
 import com.githang.statusbar.StatusBarCompat;
 import com.glg.baselib.R;
@@ -48,7 +46,7 @@ public abstract class BaseSwipeActivity
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         initSwipeBackFinish();
         super.onCreate(savedInstanceState);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         setContentView(getLayoutID());
         initViews();
 

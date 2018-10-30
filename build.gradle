@@ -167,6 +167,13 @@ dependencies {
         exclude group: 'com.android.support'
     }
 
+    //屏幕适配
+    api('me.jessyan:autosize:1.0.1') {
+        exclude group: 'com.android.support'
+    }
+
+
+
 }
 
 
