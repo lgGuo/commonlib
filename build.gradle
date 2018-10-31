@@ -138,19 +138,6 @@ dependencies {
         exclude group: 'com.android.support'
     }
 
-    // 知乎图片选择器
-    api "com.github.qingmei2:rximagepicker:2.2.0", {
-        exclude group: 'com.android.support'
-    }
-
-    api "com.github.qingmei2:rximagepicker_support:2.2.0", {
-        exclude group: 'com.android.support'
-    }
-
-    api "com.github.qingmei2:rximagepicker_support_zhihu:2.2.0", {
-        exclude group: 'com.android.support'
-    }
-
     //通用dialog
     api('com.github.Othershe:NiceDialog:1.1.4') {
         exclude group: 'com.android.support'
