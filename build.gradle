@@ -160,6 +160,12 @@ dependencies {
     }
 
 
+    //图片选择器
+    api ('com.github.LuckSiege.PictureSelector:picture_library:v2.2.3') {
+        exclude group: 'com.android.support'
+    }
+
+
 
 }
 
