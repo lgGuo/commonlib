@@ -176,13 +176,24 @@ public abstract class BaseSwipeActivity
 
 
     /**
+     * 状态栏深浅颜色
+     */
+    protected void setLightStatusBar(boolean lightMode){
+        if(Build.VERSION.SDK_INT <=22){
+            StatusBarCompat.setStatusBarColor(this, Color.parseColor("#9f999999"), false);
+        }else {
+            StatusBarCompat.setStatusBarColor(this, Color.TRANSPARENT, lightMode);
+        }
+    }
+
+
+    /**
      * 透明状态栏
      * @param offsetView 需要偏移的view,防止view顶到状态栏上
      */
     protected void setTansparentStatuBar(View offsetView){
         if(Build.VERSION.SDK_INT <=22){
             StatusBarUtil.setTranslucentForImageViewInFragment(this,0,offsetView);
-
         }else {
             StatusBarUtil.setTranslucentForImageView(this,0,offsetView);
 
