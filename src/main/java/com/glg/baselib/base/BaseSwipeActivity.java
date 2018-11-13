@@ -164,6 +164,19 @@ public abstract class BaseSwipeActivity
 
 
     /**
+     * 状态栏深浅颜色
+     */
+    protected void setLightStatusBar(boolean lightMode){
+        if(Build.VERSION.SDK_INT <=22){
+            StatusBarCompat.setStatusBarColor(this, Color.parseColor("#9f999999"), false);
+        }else {
+
+            StatusBarCompat.setStatusBarColor(this, Color.TRANSPARENT, lightMode);
+        }
+    }
+
+
+    /**
      * 浅色状态栏
      */
     protected void setLightStatusBar(){
@@ -175,17 +188,6 @@ public abstract class BaseSwipeActivity
     }
 
 
-    /**
-     * 状态栏深浅颜色
-     */
-    protected void setLightStatusBar(boolean lightMode){
-        if(Build.VERSION.SDK_INT <=22){
-            StatusBarCompat.setStatusBarColor(this, Color.parseColor("#9f999999"), false);
-        }else {
-
-            StatusBarCompat.setStatusBarColor(this, Color.TRANSPARENT, lightMode);
-        }
-    }
 
 
     /**
