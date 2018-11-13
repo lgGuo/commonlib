@@ -182,6 +182,7 @@ public abstract class BaseSwipeActivity
         if(Build.VERSION.SDK_INT <=22){
             StatusBarCompat.setStatusBarColor(this, Color.parseColor("#9f999999"), false);
         }else {
+
             StatusBarCompat.setStatusBarColor(this, Color.TRANSPARENT, lightMode);
         }
     }
